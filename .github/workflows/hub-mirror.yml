@@ -71,6 +71,16 @@ jobs:
 
           # 生成 output.md 文件，以便后续步骤添加评论
           echo "docker pull $DEST_IMAGE" > output.md
+      # 3.半.保存并上传tar包
+      - name: Save image as tar
+        run: |
+          docker save ${{ secrets.DOCKER_USERNAME }}/strix-sandbox:0.1.12 -o strix-sandbox.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: strix-sandbox-image
+          path: strix-sandbox.tar
       # 4. 当成功输出 output.md 文件时，为 issues 添加评论
       - name: Add comment
         if: ${{ hashFiles('output.md') }}
