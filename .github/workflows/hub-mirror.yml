@@ -4,7 +4,7 @@ name: hub-mirror
 # 当新建或者修改 issues 时，触发当前 workflow
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, edited,labeled]
 
 # 需要执行的任务列表
 jobs:
